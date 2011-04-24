@@ -1,3 +1,13 @@
 This is the OpenEmbedded packages metadata repository.
 
 See http://openembedded.org
+
+
+*** NOTES ***
+- First switch to the overo branch, then pull the updates from official repo.
+  $ git checkout overo
+  $ git pull 'remote-name-of-official-repo'
+
+- Merge ubuntu-11.04 and up-to-date overo branches into ubuntu-11.04 branch
+  $ git checkout ubuntu-11.04
+  $ git merge overo
