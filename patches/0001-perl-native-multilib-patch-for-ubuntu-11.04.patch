@@ -1,0 +1,52 @@
+From 4248371fec3606fe0cdf9d104acf39228dad8120 Mon Sep 17 00:00:00 2001
+From: Scott Ellis <scott@jumpnowtek.com>
+Date: Mon, 18 Apr 2011 04:22:46 -0400
+Subject: [PATCH 1/2] perl-native multilib patch for ubuntu 11.04
+
+---
+ recipes/perl/files/ubuntu-11.04-multiarch.patch |   12 ++++++++++++
+ recipes/perl/perl-native_5.10.1.bb              |    3 +++
+ 2 files changed, 15 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/perl/files/ubuntu-11.04-multiarch.patch
+
+diff --git a/recipes/perl/files/ubuntu-11.04-multiarch.patch b/recipes/perl/files/ubuntu-11.04-multiarch.patch
+new file mode 100644
+index 0000000..3843357
+--- /dev/null
++++ b/recipes/perl/files/ubuntu-11.04-multiarch.patch
+@@ -0,0 +1,12 @@
++diff --git perl-5.10.1/Configure-orig perl-5.10.1/Configure
++index 5508fd2..8ee7dae 100755
++--- perl-5.10.1/Configure-orig
+++++ perl-5.10.1/Configure
++@@ -1311,6 +1311,7 @@ glibpth="/lib /usr/lib /lib64 /usr/lib64 $xlibpth"
++ glibpth="$glibpth /usr/ccs/lib /usr/ucblib /usr/local/lib"
++ test -f /usr/shlib/libc.so && glibpth="/usr/shlib $glibpth"
++ test -f /shlib/libc.so     && glibpth="/shlib $glibpth"
+++test -f /usr/lib/`uname -m`-linux-gnu/libc.so && glibpth="/usr/lib/`uname -m`-linux-gnu $glibpth"
++ test -d /usr/lib64         && glibpth="$glibpth /lib64 /usr/lib64 /usr/local/lib64"
++
++ : Private path used by Configure to find libraries.  Its value
+diff --git a/recipes/perl/perl-native_5.10.1.bb b/recipes/perl/perl-native_5.10.1.bb
+index 5aa0c7b..3dafc10 100644
+--- a/recipes/perl/perl-native_5.10.1.bb
++++ b/recipes/perl/perl-native_5.10.1.bb
+@@ -20,6 +20,7 @@ SRC_URI = "http://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz;name=perl-${PV} \
+            file://native-nopacklist.patch \
+            file://native-perlinc.patch \
+ 	   file://perl-fix-cross-library-check.patch \
++           file://ubuntu-11.04-multiarch.patch \
+ 	   "
+ 
+ SRC_URI[perl-5.10.1.md5sum] = "b9b2fdb957f50ada62d73f43ee75d044"
+@@ -29,6 +30,8 @@ S = "${WORKDIR}/perl-${PV}"
+ 
+ inherit native
+ 
++export LD="${CC}"
++
+ do_configure () {
+     ./Configure \
+         -Dcc="${CC}" \
+-- 
+1.7.4.1

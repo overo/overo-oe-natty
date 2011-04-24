@@ -1,0 +1,24 @@
+From 22347565b1e55b076d0bf890f6feda745546207d Mon Sep 17 00:00:00 2001
+From: Scott Ellis <scott@jumpnowtek.com>
+Date: Mon, 18 Apr 2011 04:25:28 -0400
+Subject: [PATCH 2/2] iputils remove docbook-utils and sgmlspl dependencies
+
+---
+ recipes/iputils/iputils_20071127.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/iputils/iputils_20071127.bb b/recipes/iputils/iputils_20071127.bb
+index a742320..6bef84b 100644
+--- a/recipes/iputils/iputils_20071127.bb
++++ b/recipes/iputils/iputils_20071127.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Utilities for the IP protocol, including traceroute6, \
+ tracepath, tracepath6, ping, ping6 and arping."
+ SECTION = "console/network"
+ LICENSE ="BSD"
+-DEPENDS = "docbook-utils-native sgmlspl-native"
++#DEPENDS = "docbook-utils-native sgmlspl-native"
+ 
+ PR = "r4"
+ 
+-- 
+1.7.4.1
